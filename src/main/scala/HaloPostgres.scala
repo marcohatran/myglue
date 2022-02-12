@@ -1,5 +1,5 @@
 import com.amazonaws.services.glue.GlueContext
-import com.amazonaws.services.glue.util.{GlueArgParser, JsonOptions}
+import com.amazonaws.services.glue.util.{GlueArgParser, Job, JsonOptions}
 import org.apache.spark.sql.SparkSession
 
 object HaloPostgres {
@@ -17,6 +17,8 @@ object HaloPostgres {
 
     implicit val spark: SparkSession = SparkSession
       .builder()
+      .appName("Java try")
+      .master("local[2]")
       .getOrCreate()
 
     val glue = new GlueContext(spark.sparkContext)
@@ -39,7 +41,7 @@ object HaloPostgres {
     val datasource0 = glue.getSourceWithFormat(
       connectionType="postgresql",
       options =JsonOptions(s"""{
-      "url":"jdbc:postgresql://192.168.1.2:5432/postgres",
+      "url":"jdbc:postgresql://localhost:5432/postgres",
       "dbtable": "public.company",
       "user":"postgres",
       "password":"changeme",
@@ -49,7 +51,7 @@ object HaloPostgres {
 
 
 
-//    Job.commit()
+    Job.commit()
   }
 
 }
