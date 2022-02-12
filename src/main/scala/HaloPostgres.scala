@@ -20,32 +20,32 @@ object HaloPostgres {
       .getOrCreate()
 
     val glue = new GlueContext(spark.sparkContext)
-    glue
-      .getSource(
-        connectionType = "postgresql",
-        connectionOptions = JsonOptions(
-          Map(
-            "url"      -> "jdbc:postgresql://localhost:5432/postgres",
-            "dbtable"  -> "baz",
-            "user"     -> "postgres",
-            "password" -> "changeme",
-            "useSSL"   -> "false"
-          )
-        )
-      )
-      .getDynamicFrame()
-      .toDF()
-      .show()
-//    val datasource0 = glue.getSourceWithFormat(
-//      connectionType="postgresql",
-//      options =JsonOptions(s"""{
-//      "url":"jdbc:postgresql://localhost:5432/postgres",
-//      "dbtable": "public.company",
-//      "user":"postgres",
-//      "password":"changeme",
-//      "useSSL": "false"
-//      }"""),
-//      transformationContext = "datasource0").getDynamicFrame().toDF().show()
+//    glue
+//      .getSource(
+//        connectionType = "postgresql",
+//        connectionOptions = JsonOptions(
+//          Map(
+//            "url"      -> "jdbc:postgresql://localhost:5432/postgres",
+//            "dbtable"  -> "baz",
+//            "user"     -> "postgres",
+//            "password" -> "changeme",
+//            "useSSL"   -> "false"
+//          )
+//        )
+//      )
+//      .getDynamicFrame()
+//      .toDF()
+//      .show()
+    val datasource0 = glue.getSourceWithFormat(
+      connectionType="postgresql",
+      options =JsonOptions(s"""{
+      "url":"jdbc:postgresql://192.168.1.2:5432/postgres",
+      "dbtable": "public.company",
+      "user":"postgres",
+      "password":"changeme",
+      "useSSL": "false"
+      }"""),
+      transformationContext = "datasource0").getDynamicFrame().toDF().show()
 
 
 
