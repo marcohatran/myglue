@@ -27,10 +27,10 @@ object HaloPostgres {
 //        connectionType = "postgresql",
 //        connectionOptions = JsonOptions(
 //          Map(
-//            "url"      -> "jdbc:postgresql://localhost:5432/postgres",
-//            "dbtable"  -> "baz",
-//            "user"     -> "postgres",
-//            "password" -> "changeme",
+//            "url"      -> "jdbc:postgresql://52.197.242.109:5432/glue_test",
+//            "dbtable"  -> "bar.baz",
+//            "user"     -> "hatt",
+//            "password" -> "123456a",
 //            "useSSL"   -> "false"
 //          )
 //        )
@@ -41,11 +41,11 @@ object HaloPostgres {
     val datasource0 = glue.getSourceWithFormat(
       connectionType="postgresql",
       options =JsonOptions(s"""{
-      "url":"jdbc:postgresql://52.197.242.109:5432/glue_test",
-      "dbtable": "bar.baz",
+      "url":"jdbc:postgresql://localhost:5432/testdb",
+      "dbtable": "bar.me",
       "redshiftTmpDir":"",
-      "user":"hatt",
-      "password":"123456a"
+      "user":"postgres",
+      "password":"changeme"
       }"""),
       transformationContext = "datasource0").getDynamicFrame().toDF().show()
 
